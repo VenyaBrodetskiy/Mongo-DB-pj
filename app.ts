@@ -1,12 +1,9 @@
-import * as dotenv from "dotenv";
-dotenv.config();
+import express from "express";
+import { studentRouter } from "./application/student/routes";
 
-import { bootstrap } from "./bootstrap";
+const app = express();
 
+app.use(express.json());
 
-bootstrap(startUp);
+app.use("/api/students", studentRouter);
 
-function startUp() {
-    console.log("Application is started");
-    // get data from mongo
-}
