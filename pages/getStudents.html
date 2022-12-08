@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Students</title>
+    <script>
+        const getStudent = async () => {
+            let endpoint = "http://localhost:3000/api/students";
+            let response = await fetch(endpoint); 
+            if (response.ok) {
+                let arrayOfJson = await response.json();
+                console.log(arrayOfJson);
+                return arrayOfJson;
+            } else
+            {
+                return [];
+            }
+        };
+        const handleData = async() => {
+            let studentArray = await getStudent();
+            let html = [];
+            studentArray.map((student) => {
+                html.push(`<h1> ${student.firstName} ## ${student.lastName} </h1>`)
+            });
+            console.log(html);
+            document.getElementById("studentsContainer").innerHTML = html.join("");
+        };
+        handleData();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: tomato;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
+        .container h1 {
+            padding: 10px;
+            color: white;
+            margin: 10px;
+            border: 5px solid aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div id="studentsContainer" class="container">
+        
+    </div> 
+</body>
+</html>

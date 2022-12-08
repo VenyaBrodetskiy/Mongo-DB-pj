@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddStudent</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+        async function postData(url = '', data = {}) {
+            let body = JSON.stringify(data);
+            let httpRequest = {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *client
+                body: body  // body data type must match "Content-Type" header
+            };
+            const response = await fetch(url, httpRequest);
+            return response; // parses JSON response into native JavaScript objects
+        };
+        
+        const saveStudent = async(firstName, lastName, age) => {
+            let student = {firstName: firstName, lastName: lastName, age: age};
+            let response = await postData(
+                "http://localhost:3000/api/students", 
+                student);
+            if (response.ok) {
+                alert("hi new student was saved correctly");
+            }
+        };
+        
+        // saveStudent("venya", "brodetskiy", 29);
+
+        const handleClick = () => {
+            let firstName = document.getElementById("firstName").value;
+            let lastName = document.getElementById("lastName").value;
+            let age = document.getElementById("age").value;
+
+            console.log(firstName, lastName, age);
+            saveStudent(firstName, lastName, age);
+        }
+        
+    </script>
+    <style>
+        .containerStudent {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            background-color: steelblue;
+        }
+
+        .myInput {
+            margin: 5px !important;
+        }
+
+    </style>
+</head>
+<body>
+<div class="containerStudent">
+    <input 
+        id="firstName"
+        type="text"
+        class="myInput form-control"
+        placeholder="first name"
+    />
+    <input 
+        id="lastName"
+        type="text"
+        class="myInput form-control"
+        placeholder="last name"
+    />
+    <input 
+        id="age"
+        type="text"
+        class="myInput form-control"
+        placeholder="age"
+    />
+
+    <button 
+        class="btn btn-success" 
+        onclick="handleClick()"
+        >Add student
+    </button>
+</div>
+</body>
+</html>
