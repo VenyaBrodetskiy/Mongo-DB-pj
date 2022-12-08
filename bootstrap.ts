@@ -1,4 +1,4 @@
-import { connect } from "./mongoDb/mongoDb";
+import { connect } from "./mongoose/mongoose";
 
 export const bootstrap = async (callback: Function) => {
     await connect();

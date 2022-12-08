@@ -1,6 +1,5 @@
-import { Collection } from "mongodb";
-import { db } from "../../../mongoDb/mongoDb";
-import { IStudent } from "../interface/student.interface";
+import { db as dbMongoose } from "../../../mongoose/mongoose";
+import { studentSchema } from "../../../mongoose/schema/student.schema";
+import { IStudent } from "../interface";
 
-export const StudentCollection: Collection<IStudent> =
-    db.collection<IStudent>("students");
+export const StudentModel = dbMongoose.model<IStudent>("Student", studentSchema, "students");

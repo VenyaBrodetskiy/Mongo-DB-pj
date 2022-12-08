@@ -1,10 +1,9 @@
-import { IStudent } from "../interface/student.interface";
-import { StudentCollection } from "../models/model"
+import { IStudent } from "../interface";
+import { StudentModel } from "../models/model";
 
 export const getStudents = async (): Promise<IStudent[]> => {
-    let res = StudentCollection.find();
-    let result = await res.toArray() as IStudent[];
-    return result;
-}
+    let res = await StudentModel.find().lean();
+    return res;
+};
 
-export const getStudentByName = () => { };
+export const getStudentsByName = () => { };
