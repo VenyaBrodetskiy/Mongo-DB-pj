@@ -1,4 +1,4 @@
-import { updateStudent } from './../service/mutation';
+import { updateStudent } from '../service/mutation.service';
 import { Router, Request, Response } from "express";
 import { IStudent } from "../interface";
 import { body, validationResult } from "express-validator";

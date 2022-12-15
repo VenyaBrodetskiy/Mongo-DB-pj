@@ -1,2 +1,2 @@
-export * from "./mutation";
-export * from "./query";
+export * from "./mutation.service";
+export * from "./query.service";
