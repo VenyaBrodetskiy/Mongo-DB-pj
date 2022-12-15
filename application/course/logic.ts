@@ -1,3 +1,1 @@
-import { AddStudent } from "../student";
-
-AddStudent
+import { addStudent } from "../student";
